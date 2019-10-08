@@ -25,6 +25,8 @@ gem 'rb-readline'
 group :development, :test do
     gem 'rspec', '~> 3.6'
     gem 'rspec-rails', '~> 3.6'
+    gem "factory_bot_rails"
+    gem 'database_cleaner' #database_cleanerはFactoryBotでDB登録したデータをテスト終了後にクリアするために使う
     gem 'guard-rspec', require: false
 end
 
