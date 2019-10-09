@@ -38,6 +38,17 @@ group :development do
   gem 'spring-watcher-listen', '2.0.1'
 end
 
+group :test do
+  # Adds support for Capybara system testing and selenium driver
+  gem 'capybara'
+
+  # A browser automation framework and ecosystem
+  gem 'selenium-webdriver'
+
+  # Keep your Selenium WebDrivers updated automatically
+  gem 'webdrivers'
+end
+
 
 
 

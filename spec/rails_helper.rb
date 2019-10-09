@@ -82,4 +82,12 @@ RSpec.configure do |config|
   config.after(:all) do
     DatabaseCleaner.clean
   end
+
+  
+  Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
+
+  RSpec.configure do |config|
+    config.include TestHelper #作成したヘルパーを追加
+  end
+
 end

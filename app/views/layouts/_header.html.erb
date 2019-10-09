@@ -1,20 +1,17 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
     <%= link_to "Naoki's Book Store", root_path, id: "logo" %>
-    <% if logged_in? %>
-      <p>ようこそ<%=session[:name]%>さん</p>
-    <% end %>
+    
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home", root_path %></li>
         <% if logged_in? %>
-          <li><%= link_to "Users", '#' %></li>
-          <li><%= link_to "Profile", current_user %></li>
-          <li><%= link_to "Settings", '#' %></li>
+          <li><%= link_to "Home", index_path %></li>
+          <li><%=link_to "#{session[:name]}さん",current_user%>/li>
           <li>
               <%= link_to "Log out", logout_path, method: :delete %>
           </li>
         <% else %>
+          <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "Log in", login_path %></li>
         <% end %>
       </ul>
