@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       # ユーザーログイン後にユーザー情報のページにリダイレクトする
       log_in user
       remember user
-      redirect_to user #ここを本のやつにすればいいのでは？
+      redirect_to 'index'
     else
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new'
@@ -20,5 +20,7 @@ class SessionsController < ApplicationController
     log_out if logged_in?
     redirect_to root_url
   end
+
+
   
 end

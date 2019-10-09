@@ -77,6 +77,12 @@ RSpec.describe User, type: :model do
     end
   end
 
+  #渡されたトークンがダイジェストと一致したらtrueを返すと言うauthenticated?のテスト
+  it "authenticated? should return false for a user with nil digest" do
+    user = User.new(name: "Example User", email: "user@example.com",password: "foobar", password_confirmation: "foobar")
+    user.authenticated?("")
+    expect(user).to be_truthy
+  end
 
 
 

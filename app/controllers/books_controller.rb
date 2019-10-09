@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   
+  
   def list
     @books = Book.paginate(page: params[:page]).search(params[:search])
   end
@@ -24,7 +25,7 @@ class BooksController < ApplicationController
   end
 
   def edit
-    @book = Book.find(params[:id])
+      @book = Book.find(params[:id])
   end
 
   def destroy
