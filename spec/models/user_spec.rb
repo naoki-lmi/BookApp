@@ -6,17 +6,15 @@ RSpec.describe User, type: :model do
     @user = FactoryBot.build(:user)
   end
 
-  context "when user is valid" do
-    it "値が入っている場合" do
-      expect(@user).to be_valid
-    end
-    it "emailが空白の場合" do
-      #FactoryBotに登録したユーザー情報のemailを空白に変更
-      @user.email = " "
+  it { is_expected.to validate_presence_of :name }
+  it { is_expected.to validate_length_of(:name).is_at_most(50) }
+  it { is_expected.to validate_presence_of :email }
+  it { is_expected.to validate_length_of(:email).is_at_most(300) }
+  it { is_expected.to validate_presence_of :password }
+  it { is_expected.to validate_length_of(:password).is_at_least(6) }
 
-      expect(@user).to be_invalid
-    end
-  end
+  
+  
 
   context "when email format is invalid" do
     it "emailのvalidateが正しく機能しているか" do
@@ -59,11 +57,11 @@ RSpec.describe User, type: :model do
     expect(@user).to_not be_valid
   end
 
-  #パスワードの長さテスト
+  #パスワードのテスト
   describe "password length" do
     #パスワードが6桁の時と５桁の時のテストを行うことで、どの位置からバリデーションが用意されているのか可視化している
     context "パスワードが６桁の時" do
-      it "正しい" do
+      it "正しいかつ一致している" do
         @user = FactoryBot.build(:user, password: "a" * 6, password_confirmation: "a" * 6)
         expect(@user).to be_valid
       end
@@ -77,13 +75,16 @@ RSpec.describe User, type: :model do
     end
   end
 
-  #渡されたトークンがダイジェストと一致したらtrueを返すと言うauthenticated?のテスト
-  it "authenticated? should return false for a user with nil digest" do
-    user = User.new(name: "Example User", email: "user@example.com",password: "foobar", password_confirmation: "foobar")
-    user.authenticated?("")
-    expect(user).to be_truthy
+
+  context "パスワードが一致しない時" do
+      it "一致していない" do
+        user = FactoryBot.build(:user, password: "a" * 6, password_confirmation: "b" * 6)
+        user.valid?
+        expect(user.errors[:password_confirmation]).to include("doesn't match Password")
+      end
   end
 
+  
 
 
 end

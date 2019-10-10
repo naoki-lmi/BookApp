@@ -1,5 +1,3 @@
-
-<%= if current_user.adimin? %>
   <% provide(:title, "Edit Book Information") %>
   <h1>Update Book Information</h1>
   <div class="row">
@@ -26,7 +24,3 @@
     </div>
   </div>
 
-  <%= else %>
-    redirect_to root_path
-
-  <%= end %>
