@@ -20,7 +20,7 @@ RSpec.feature "About page transition", type: :feature do
     end
   end
 
-  feature 'home page' do 
+  feature 'signup page' do 
     before do
       visit signup_path
     end
